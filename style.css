@@ -1,0 +1,19 @@
+body {
+    font-family: sans-serif;
+}
+
+#scryfall-exp {
+    width: 90vw;
+    overflow: auto;
+    white-space: nowrap;
+    padding: 10px;
+    position: sticky;
+    top: 10px;
+    background-color: #2b253a;
+    color: white;
+    font-family: monospace;
+}
+
+#random-gen-number {
+    width: 64px;
+}
