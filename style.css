@@ -1,5 +1,5 @@
 body {
-    font-family: sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     margin-left: 1rem;
 }
 
@@ -15,10 +15,17 @@ body {
     font-family: monospace;
 }
 
-#random-gen-number {
-    width: 64px;
-}
-
 .clickable {
     cursor: pointer;
+}
+
+button {
+    cursor: pointer;
+}
+
+#simple-card-output {
+    background-color: #f0f0f0;
+    font-size: 14px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }

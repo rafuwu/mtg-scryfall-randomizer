@@ -6,30 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTG card randomizer</title>
     <link rel="stylesheet" href="style.css">
-    <!-- <script src="js.js"></script> -->
+    <script src="js.js"></script>
 </head>
 <body>
     <h1>MTG card randomizer</h1>
     
-    <h2>Scryfall search query:</h2>
+    <h2>Scryfall search query</h2>
 
     <input type="text" list="exp-list" id="scryfall-api-search-query" name="scryfall-exp"></input>
     <datalist id="exp-list">
         <option>set:leb -(t:land legal:standard)</option>
     </datalist>
 
-    <section class="random-gen">
-        <h2>Get random cards</h2>
-        <label>Number of cards to get: </label>
-        <input type="number" id="random-gen-ammount" name="random-gen-ammount" placeholder="1" min="1" max="128">
+    <p>Leave empty to choose from all available cards. Use a search query to specify the type of cards that can be chosen.</p>
 
-        <br>
+    <p><a href="https://scryfall.com/docs/syntax" target="_blank" rel="noopener noreferrer">Scryfall Search Reference</a></p>
+
+    <div class="random-gen">
+        <h2>Get random card(s)</h2>
+        <label>Number of cards to get: </label>
+        <input type="number" id="ammount" name="ammount" placeholder="1" min="1" max="128">
         <button type="button" onclick="getCards()" id="random-gen-get">Get cards</button>
 
-    </section>
+    </div>
 
-    <section class="draft-gen">
+    <div>
+        <h3>Simple card output</h3>
 
-    </section>
+        <ul id="simple-card-output">
+
+        </ul>
+
+        <button type="button" onclick='document.getElementById("simple-card-output").innerHTML = ""'>Clear list</button>
+    </div>
 </body>
 </html>
