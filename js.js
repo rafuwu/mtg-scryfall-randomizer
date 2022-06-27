@@ -12,11 +12,13 @@ console.log(mtg_set); */
     let scryfall_exp = `set:${set} -(t:land legal:standard)`
 } */
 
-function scryfall_fetch() {
+const API_SCRYFALL_RANDOM = "https://api.scryfall.com/cards/random"
+
+/* function scryfall_fetch() {
     scryfall_expression = document.getElementById('scryfall-exp').value;
     scryfall_expression_uri = escape(scryfall_expression)
     console.log(`https://api.scryfall.com/cards/random?q=${scryfall_expression_uri}`);
-    for (let i=0; i<document.getElementById('random-gen-ammount').value;i++) {
+    
     fetch(`https://api.scryfall.com/cards/random?q=${scryfall_expression_uri}`, { mode: 'no-cors'} )
     .then(response => {
         if (!response.ok) {
@@ -28,9 +30,38 @@ function scryfall_fetch() {
     .then(json => {
         console.log("JSON!!!" + json);
     })
-    .catch(function () {
-        this.dataError = true;
+    .catch(function (error) {
+        console.error("ERROR");
+        console.error(error);
     })
-    }
     
-};
+}; */
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function displayCard(x) {
+
+}
+
+
+async function fetchScryfall() {
+    let response = await fetch(API_SCRYFALL_RANDOM);
+    let data = await response.json();
+    // let {name, scryfall_uri, image_uris, set, set_name, rarity} = data;
+    // return name, scryfall_uri, image_uris, set, set_name, rarity;
+    console.log(data.name);
+    return data;
+}
+
+async function getCards() {
+    let loop_number = document.getElementById("random-gen-ammount").value;
+    for (let i = 0; i < loop_number; i++) {
+        let card = await fetchScryfall();
+        sleep(150);
+        // console.log(card);
+        console.log(card.name);
+        // displayCard(card);
+    }
+}
