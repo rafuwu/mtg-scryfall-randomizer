@@ -19,19 +19,6 @@ body {
     width: 64px;
 }
 
-.helper {
-    background-color: antiquewhite;
-    margin-top: 2rem;
-    padding: 1rem 0 1rem 1rem;
-    border: solid 1px darksalmon;
-    border-left: 0;
-    border-right: 0;
-}
-
-.helper-links {
-    padding-top: 1rem;
-}
-
 .clickable {
     cursor: pointer;
 }
