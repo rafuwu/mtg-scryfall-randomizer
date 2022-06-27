@@ -28,7 +28,7 @@ async function getCards() {
         // console.log(card);
         console.log(card.name);
         console.log(card.scryfall_uri)
-        document.getElementById("simple-card-output").innerHTML += `<li><a href="${card.scryfall_uri}" target="_blank" rel="noopener noreferrer">${card.name}</a></li>`;
+        document.getElementById("simple-card-output").innerHTML += `<li><a href="${card.scryfall_uri}" target="_blank" rel="noopener noreferrer">${card.name}</a> (<abbr title="${card.set_name}">${card.set.toUpperCase()}</abbr>)</li>`;
         // displayCard(card);
     }
 }
