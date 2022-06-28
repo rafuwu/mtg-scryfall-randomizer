@@ -21,7 +21,7 @@ async function fetchScryfall(query) {
 }
 
 function displayInSimpleList(card) {
-    document.getElementById("simple-card-output").innerHTML += `<li><a href="${card.scryfall_uri}" target="_blank" rel="noopener noreferrer"><strong>${card.name}</strong></a> <a href="${card.scryfall_set_uri}" target="_blank" rel="noopener noreferrer">(<abbr title="${card.set_name}">${card.set.toUpperCase()}</abbr>)</a></li>`;
+    document.getElementById("simple-card-output").innerHTML += `<li><a href="${card.scryfall_uri}" target="_blank" rel="noopener noreferrer"><strong>${card.name}</strong></a> <span class="simple-list-set"> <a href="${card.scryfall_set_uri}" target="_blank" rel="noopener noreferrer">(<abbr title="${card.set_name}">${card.set.toUpperCase()}</abbr>)</a> </span> </li>`;
 }
 
 async function getCards() {
@@ -36,7 +36,7 @@ async function getCards() {
         console.log(card.scryfall_uri)
 
         displayInSimpleList(card)
-        
+
         sleep(150);
     }
 }
