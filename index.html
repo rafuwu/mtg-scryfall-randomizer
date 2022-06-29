@@ -6,11 +6,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTG card randomizer</title>
     <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#160020">
+    <link rel="shortcut icon" href="./favicon.png" type="image/png">
+    <script src="./main.js" type="module" defer></script>
 </head>
 <body>
-    <ul style="list-style: none;">
-        <a href="v1.html"><li>v1</li></a>
-        <li>v2</li>
-    </ul>
+    <h1>MTG card randomizer</h1>
+
+    <div id="js-disabled-warning">
+        ⚠ Javascript is disabled or unsupported in this browser
+    </div>
+    
+    <h2>Scryfall search query</h2>
+
+    <input type="text" list="exp-list" id="scryfall-api-search-query" name="scryfall-exp"></input>
+    <datalist id="exp-list">
+        <option>set:leb -(t:land legal:standard)</option>
+    </datalist>
+
+    <p>Leave empty to choose from all available cards. Use a search query to specify the type of cards that can be chosen.</p>
+
+    <p><a href="https://scryfall.com/docs/syntax" target="_blank" rel="noopener noreferrer">Scryfall Search Reference</a></p>
+
+    <div class="random-gen">
+        <h2>Get random card(s)</h2>
+        <label>Number of cards to get: </label>
+        <input type="number" id="ammount" name="ammount" placeholder="1-128" min="1" max="128" value="1"><br>
+        <button type="button" id="random-gen-get">Get cards</button>
+
+    </div>
+
+    <div>
+        <h3>Simple card output</h3>
+
+        <ul id="simple-card-output">
+
+        </ul>
+
+        <button type="button" onclick='document.getElementById("simple-card-output").innerHTML = ""'>Clear list</button>
+    </div>
+
+    <div>
+        <h3>Table output</h3>
+
+        <table id="table-output">
+            <tr>
+                <th>Card name</th>
+                <th>Set</th>
+                <th>Rarity</th>
+                <th>Image</th>
+            </tr>
+        </table>
+    </div>
+
+    <h3>Extra options</h3>
+
+    <button type="button" id="btn-download-cod">Download as .cod file for Cockatrice</button>
+    <!-- %LOCALAPPDATA%\Cockatrice\Cockatrice\decks -->
+    
+    <h4>Recommended paths</h4> 
+    <table>
+        <tr>
+            <th>System</th>
+            <th>Path</th>
+        </tr>
+        <tr>
+            <td>Windows</td>
+            <td><code>%LOCALAPPDATA%\Cockatrice\Cockatrice\decks</code></td>
+        </tr>
+    </table>
+
+
 </body>
+
+<script>
+    document.getElementById("js-disabled-warning").style.display = "none";
+</script>
+
 </html>
