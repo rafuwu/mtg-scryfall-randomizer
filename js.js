@@ -4,11 +4,26 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function debug(card, query) {
+    let general_debug_table = {
+        "query": "",
+        "query_URI" : query,
+        "card.name" : card.name,
+        "card.set_name" : card.set_name,
+        "card.set" : card.set,
+        "card.scryfall_uri" : card.scryfall_uri,
+        "card.scryfall_set_uri" : card.scryfall_set_uri,
+        "card.rarity" : card.rarity,
+    }
+
+    console.table(general_debug_table)
+}
+
 function getSearchQuery() {
     let query_plain = document.getElementById("scryfall-api-search-query").value
-    console.log(query_plain)
+    console.log("query_plain ': " + query_plain + "'")
     let query_URI = encodeURIComponent(query_plain)
-    console.log(query_URI)
+    console.log("query_URI : '" + query_URI + "'")
     return query_URI
 }
 
@@ -40,9 +55,8 @@ async function getCards() {
     
     for (let i = 0; i < ammount; i++) {
         let card = await fetchScryfall(query);
-
-        console.log(card.name);
-        console.log(card.scryfall_uri)
+        
+        debug(card, query)
 
         displayInSimpleList(card)
         displayInTable(card)
