@@ -24,6 +24,15 @@ function displayInSimpleList(card) {
     document.getElementById("simple-card-output").innerHTML += `<li><a href="${card.scryfall_uri}" target="_blank" rel="noopener noreferrer"><strong>${card.name}</strong></a> <span class="simple-list-set"> <a href="${card.scryfall_set_uri}" target="_blank" rel="noopener noreferrer">(<abbr title="${card.set_name}">${card.set.toUpperCase()}</abbr>)</a> </span> </li>`;
 }
 
+function displayInTable(card) {
+    document.getElementById("table-output").innerHTML += `<tr>
+    <td><a href="${card.scryfall_uri}" target="_blank" rel="noopener noreferrer"> ${card.name} </a></td>
+    <td><a href="${card.scryfall_set_uri}" target="_blank" rel="noopener noreferrer"> ${card.set_name}</a> (${card.set.toUpperCase()})</td>
+    <td>${card.rarity}</td>
+    <td><a href="${card.image_uris.large}" target="_blank" rel="noopener noreferrer"><img src="${card.image_uris.small}" alt="Card image" referrerpolicy="no-referrer"></a></td>
+</tr>`
+}
+
 async function getCards() {
     let ammount = document.getElementById("ammount").value;
 
@@ -36,7 +45,8 @@ async function getCards() {
         console.log(card.scryfall_uri)
 
         displayInSimpleList(card)
+        displayInTable(card)
 
-        sleep(150);
+        sleep(6000);
     }
 }
