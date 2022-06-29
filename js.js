@@ -55,20 +55,29 @@ function displayInTable(card) {
 </tr>`
 }
 
-async function getCards() {
+async function helperFetchAndDisplay(query) {
+    let card = await fetchScryfall(query.URI)
+
+    debug(card, query)
+
+    displayInSimpleList(card)
+    displayInTable(card)
+}
+
+function getCards() {
     let ammount = document.getElementById("ammount").value;
 
     let query = getSearchQuery()
-    
-    for (let i = 0; i < ammount; i++) {
 
-        let card = await fetchScryfall(query.URI);
+    if (ammount == 1) {
+        helperFetchAndDisplay(query)
+    } else {
+        helperFetchAndDisplay(query)
         
-        debug(card, query)
-
-        displayInSimpleList(card)
-        displayInTable(card)
-
-        sleep(6000);
-    }
-}
+        for (let i = 0; i < ammount-1; i++) {
+            setTimeout( async () => {
+                helperFetchAndDisplay(query)
+              }, "200") // https://scryfall.com/docs/api
+        }               // We kindly ask that you insert 50 – 100
+    }                   // milliseconds of delay between
+}                       // the requests you send to the server
