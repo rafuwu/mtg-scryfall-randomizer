@@ -7,10 +7,14 @@
     <title>MTG card randomizer</title>
     <link rel="stylesheet" href="style.css">
     <meta name="theme-color" content="#160020">
-    <script src="js.js"></script>
+    <script src="js.js" defer></script>
 </head>
 <body>
     <h1>MTG card randomizer</h1>
+
+    <div id="js-disabled-warning">
+        ⚠ Javascript is disabled or unsupported in this browser
+    </div>
     
     <h2>Scryfall search query</h2>
 
@@ -56,4 +60,9 @@
 
     </div>
 </body>
+
+<script>
+    document.getElementById("js-disabled-warning").style.display = "none";
+</script>
+
 </html>

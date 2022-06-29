@@ -5,6 +5,17 @@ body {
     color: #210030;
 }
 
+#js-disabled-warning {
+    display: inline-block;
+    color: black;
+    font-weight: bolder;
+    margin-bottom: 1em;
+    padding: .4rem 1.2rem;
+    border-radius: 5px;
+    background-color: #F0DB4F;
+    font-size: large;
+}
+
 :link, :visited {
     color: #8816bd;
 }
