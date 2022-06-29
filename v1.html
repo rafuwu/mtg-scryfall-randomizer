@@ -7,7 +7,7 @@
     <title>MTG card randomizer</title>
     <link rel="stylesheet" href="style.css">
     <meta name="theme-color" content="#160020">
-    <script src="js.js" defer></script>
+    <script src="main.js" type="module" defer></script>
 </head>
 <body>
     <h1>MTG card randomizer</h1>
@@ -56,9 +56,11 @@
                 <th>Image</th>
             </tr>
         </table>
-
-
     </div>
+
+    <button type="button" onclick="downloadCod()" id="random-gen-get">Download as .cod file for Cockatrice</button>
+    <!-- %LOCALAPPDATA%\Cockatrice\Cockatrice\decks -->
+
 </body>
 
 <script>

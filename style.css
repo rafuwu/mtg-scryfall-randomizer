@@ -64,6 +64,9 @@ button {
     display: none;
 }
 
+table {
+    margin-bottom: 2rem;
+}
 table, th, td {
     border:1px solid black;
     border-collapse: collapse;

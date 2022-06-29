@@ -1,4 +1,7 @@
+import * as deck from "./cockatrice_deck_saver.js"
+
 const SCRYFALL_API_RANDOM = "https://api.scryfall.com/cards/random?q="
+
 
 function debug(card, query) {
     let general_debug_table = {
@@ -54,10 +57,13 @@ function displayInTable(card) {
 async function helperFetchAndDisplay(query) {
     let card = await fetchScryfall(query.URI)
 
+    addCardToList(card)
+
     debug(card, query)
 
     displayInSimpleList(card)
     displayInTable(card)
+    
 }
 
 function getCards() {
