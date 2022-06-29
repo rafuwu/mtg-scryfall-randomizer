@@ -6,8 +6,8 @@ function sleep(ms) {
 
 function debug(card, query) {
     let general_debug_table = {
-        "query": "",
-        "query_URI" : query,
+        "query.plain" : query.plain,
+        "query.URI" : query.URI,
         "card.name" : card.name,
         "card.set_name" : card.set_name,
         "card.set" : card.set,
@@ -21,10 +21,16 @@ function debug(card, query) {
 
 function getSearchQuery() {
     let query_plain = document.getElementById("scryfall-api-search-query").value
-    console.log("query_plain ': " + query_plain + "'")
     let query_URI = encodeURIComponent(query_plain)
-    console.log("query_URI : '" + query_URI + "'")
-    return query_URI
+
+    let query = {
+        "plain": query_plain,
+        "URI": query_URI,
+    }
+
+    console.table(query)
+
+    return query
 }
 
 async function fetchScryfall(query) {
@@ -54,7 +60,7 @@ async function getCards() {
     let query = getSearchQuery()
     
     for (let i = 0; i < ammount; i++) {
-        let card = await fetchScryfall(query);
+        let card = await fetchScryfall(query.URI);
         
         debug(card, query)
 
