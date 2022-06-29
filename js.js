@@ -74,6 +74,6 @@ function getCards() {
             setTimeout( async () => {
                 helperFetchAndDisplay(query)
               }, "200") // https://scryfall.com/docs/api
-        }               // We kindly ask that you insert 50 – 100
+        }               // "We kindly ask that you insert 50 – 100
     }                   // milliseconds of delay between
-}                       // the requests you send to the server
+}                       // the requests you send to the server"
