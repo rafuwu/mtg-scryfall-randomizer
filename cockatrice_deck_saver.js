@@ -39,11 +39,50 @@ function addCardToList(card) {
 }
 
 function createComplexCardList() {
+    let card_list_complex = new Array
+    /*   ------- Array example ------- 
+     *
+     *   [
+     *       {
+     *           "number" : 3,
+     *           "name" : "Example 1"
+     *       },
+     *       {
+     *           "number" : 1,
+     *           "name" : "Example 2"
+     *       }
+     *   ]
+    */
+
+    for (let i = 0; i < card_list.length; i++) {
+        // If card_list[i] doesn't exist somewhere in the array of objects that is card_list_complex, add it
+        if (!card_list_complex.some(elem => elem.name === card_list[i])) {
+            card_list_complex.push({
+                "number" : 1,
+                "name" : card_list[i]
+            })
+        } else { // If if exists already somewhere, find it and add +1 to the counter
+            for (let i = 0; i < card_list_complex.length; i++) {
+                if (card_list_complex[i].name == card_list[i]) {
+                    card_list_complex[i].number += 1
+                    break
+                }
+                
+            }
+        }
+        
+    }
+
+    console.log(card_list_complex)
+    console.table(card_list_complex)
+}
+
+function deckFileText() {
     
 }
 
 function downloadCod() {
-    
+    createComplexCardList()
 }
 
 export { addCardToList, downloadCod }
