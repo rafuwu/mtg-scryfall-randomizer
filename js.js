@@ -1,9 +1,5 @@
 const SCRYFALL_API_RANDOM = "https://api.scryfall.com/cards/random?q="
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 function debug(card, query) {
     let general_debug_table = {
         "query.plain" : query.plain,
