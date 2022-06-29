@@ -1,4 +1,4 @@
-const COCKATRICE_DECK_TEMPLATE_START = `<?xml version="1.0" encoding="UTF-8"?>
+const COCKATRICE_DECK_FILE_TEMPLATE = `<?xml version="1.0" encoding="UTF-8"?>
 <cockatrice_deck version="1">
     <deckname>{DECKNAME}</deckname>
     <comments>{COMMENTS}</comments>
@@ -8,7 +8,7 @@ const COCKATRICE_DECK_TEMPLATE_START = `<?xml version="1.0" encoding="UTF-8"?>
 </cockatrice_deck>
 `
 
-const COCKATRICE_DECK_TEMPLATE_CARD = '<card number="{NUMBER}" name="{NAME}"/>'
+const COCKATRICE_DECK_CARD_TEMPLATE = '<card number="{NUMBER}" name="{NAME}"/>'
 
 let card_list = new Array
 
@@ -75,14 +75,45 @@ function createComplexCardList() {
 
     console.log(card_list_complex)
     console.table(card_list_complex)
+
+    return card_list_complex
 }
 
-function deckFileText() {
-    
+function cockatrice_deckCards(card_list_complex) {
+    let cockatrice_deck_cards_array = new Array
+    for (let i = 0; i < card_list_complex.length; i++) {
+        var a = COCKATRICE_DECK_CARD_TEMPLATE
+        var a = a.replace("{NUMBER}", card_list_complex[i].number)
+        var a = a.replace("{NAME}", card_list_complex[i].name)
+        
+        cockatrice_deck_cards_array.push(a)
+        
+    }
+    console.debug(cockatrice_deck_cards_array)
+    return cockatrice_deck_cards_array
+}
+
+function cockatrice_deckCardListArrayToPlainText(cockatrice_deck_cards_array) {
+    let cockatrice_deck_cards_plaintext = cockatrice_deck_cards_array.join("\n")
+    console.debug(cockatrice_deck_cards_plaintext)
+    return cockatrice_deck_cards_plaintext
+}
+
+function cockatrice_deckJoin(cockatrice_deck_cards_plaintext) {
+    var cockatrice_deck = COCKATRICE_DECK_FILE_TEMPLATE
+    var cockatrice_deck = cockatrice_deck.replace("{DECKNAME}", "deck name")
+    var cockatrice_deck = cockatrice_deck.replace("{COMMENTS}", "this is a comment")
+    var cockatrice_deck = cockatrice_deck.replace("{CARDS}", cockatrice_deck_cards_plaintext)
+    console.debug(cockatrice_deck)
+    return cockatrice_deck
 }
 
 function downloadCod() {
-    createComplexCardList()
+    let card_list_complex = createComplexCardList()
+    let cockatrice_deck_cards_array = cockatrice_deckCards(card_list_complex)
+    let cockatrice_deck_cards_plaintext = cockatrice_deckCardListArrayToPlainText(cockatrice_deck_cards_array)
+    let cockatrice_deck = cockatrice_deckJoin(cockatrice_deck_cards_plaintext)
+    download(cockatrice_deck, "file.cod", Text)
 }
 
 export { addCardToList, downloadCod }
