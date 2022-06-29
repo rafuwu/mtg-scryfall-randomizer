@@ -32,6 +32,26 @@ function download(text, filename, type) {
     }
 }
 
+function defineISODate() {
+    try {
+        
+        /*
+        let d = new Date()
+        let year = d.getFullYear();
+        let month = d.getMonth();
+        let day = d.getDay()
+        let seconds = d.getSeconds();
+        */
+       var utc = new Date().toUTCString.toString()
+       var utc_safe = iso.replace(":", ".")
+    
+       return {ISOdate: iso, ISOdate_safe: iso_safe}
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 function addCardToList(card) {
     card_list.push(card.name)
     console.log(card_list)
@@ -94,14 +114,14 @@ function cockatrice_deckCards(card_list_complex) {
 }
 
 function cockatrice_deckCardListArrayToPlainText(cockatrice_deck_cards_array) {
-    let cockatrice_deck_cards_plaintext = cockatrice_deck_cards_array.join("\n")
+    let cockatrice_deck_cards_plaintext = cockatrice_deck_cards_array.join("\n        ")
     console.debug(cockatrice_deck_cards_plaintext)
     return cockatrice_deck_cards_plaintext
 }
 
-function cockatrice_deckJoin(cockatrice_deck_cards_plaintext) {
+function cockatrice_deckJoin(date, cockatrice_deck_cards_plaintext) {
     var cockatrice_deck = COCKATRICE_DECK_FILE_TEMPLATE
-    var cockatrice_deck = cockatrice_deck.replace("{DECKNAME}", "deck name")
+    var cockatrice_deck = cockatrice_deck.replace("{DECKNAME}", date)
     var cockatrice_deck = cockatrice_deck.replace("{COMMENTS}", "this is a comment")
     var cockatrice_deck = cockatrice_deck.replace("{CARDS}", cockatrice_deck_cards_plaintext)
     console.debug(cockatrice_deck)
@@ -109,11 +129,12 @@ function cockatrice_deckJoin(cockatrice_deck_cards_plaintext) {
 }
 
 function downloadCod() {
+    let date = defineISODate()
     let card_list_complex = createComplexCardList()
     let cockatrice_deck_cards_array = cockatrice_deckCards(card_list_complex)
     let cockatrice_deck_cards_plaintext = cockatrice_deckCardListArrayToPlainText(cockatrice_deck_cards_array)
-    let cockatrice_deck = cockatrice_deckJoin(cockatrice_deck_cards_plaintext)
-    download(cockatrice_deck, "file.cod", Text)
+    let cockatrice_deck = cockatrice_deckJoin(date.iso, cockatrice_deck_cards_plaintext)
+    download(cockatrice_deck, date.ISOdate_safe + ".cod", Text)
 }
 
 export { addCardToList, downloadCod }
