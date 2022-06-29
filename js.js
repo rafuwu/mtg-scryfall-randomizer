@@ -9,11 +9,11 @@ function debug(card, query) {
         "query.plain" : query.plain,
         "query.URI" : query.URI,
         "card.name" : card.name,
-        "card.set_name" : card.set_name,
+        "card.rarity" : card.rarity,
         "card.set" : card.set,
+        "card.set_name" : card.set_name,
         "card.scryfall_uri" : card.scryfall_uri,
         "card.scryfall_set_uri" : card.scryfall_set_uri,
-        "card.rarity" : card.rarity,
     }
 
     console.table(general_debug_table)
@@ -28,7 +28,8 @@ function getSearchQuery() {
         "URI": query_URI,
     }
 
-    console.table(query)
+    if (query_plain == "")  console.info("Query is null")
+    else                    console.table(query)
 
     return query
 }
@@ -60,6 +61,7 @@ async function getCards() {
     let query = getSearchQuery()
     
     for (let i = 0; i < ammount; i++) {
+
         let card = await fetchScryfall(query.URI);
         
         debug(card, query)
