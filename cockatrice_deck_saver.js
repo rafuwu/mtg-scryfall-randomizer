@@ -38,6 +38,12 @@ function addCardToList(card) {
     return card_list
 }
 
+function createComplexCardList() {
+    
+}
+
 function downloadCod() {
     
 }
+
+export { addCardToList, downloadCod }

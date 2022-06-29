@@ -7,7 +7,8 @@
     <title>MTG card randomizer</title>
     <link rel="stylesheet" href="style.css">
     <meta name="theme-color" content="#160020">
-    <script src="main.js" type="module" defer></script>
+    <link rel="shortcut icon" href="./favicon.png" type="image/png">
+    <script src="./main.js" type="module" defer></script>
 </head>
 <body>
     <h1>MTG card randomizer</h1>
@@ -31,7 +32,7 @@
         <h2>Get random card(s)</h2>
         <label>Number of cards to get: </label>
         <input type="number" id="ammount" name="ammount" placeholder="1-128" min="1" max="128" value="1"><br>
-        <button type="button" onclick="getCards()" id="random-gen-get">Get cards</button>
+        <button type="button" id="random-gen-get">Get cards</button>
 
     </div>
 
@@ -58,7 +59,7 @@
         </table>
     </div>
 
-    <button type="button" onclick="downloadCod()" id="random-gen-get">Download as .cod file for Cockatrice</button>
+    <button type="button" id="btn-download-cod">Download as .cod file for Cockatrice</button>
     <!-- %LOCALAPPDATA%\Cockatrice\Cockatrice\decks -->
 
 </body>

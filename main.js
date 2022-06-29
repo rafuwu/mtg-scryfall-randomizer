@@ -1,4 +1,9 @@
-import * as deck from "./cockatrice_deck_saver.js"
+import {addCardToList, downloadCod} from "./cockatrice_deck_saver.js"
+
+
+const btn_get_cards = document.getElementById("random-gen-get")
+const btn_download_cod = document.getElementById("btn-download-cod")
+
 
 const SCRYFALL_API_RANDOM = "https://api.scryfall.com/cards/random?q="
 
@@ -57,7 +62,12 @@ function displayInTable(card) {
 async function helperFetchAndDisplay(query) {
     let card = await fetchScryfall(query.URI)
 
-    addCardToList(card)
+    try {
+        addCardToList(card)
+        
+    } catch (error) {
+        console.log(error)
+    }
 
     debug(card, query)
 
@@ -66,11 +76,11 @@ async function helperFetchAndDisplay(query) {
     
 }
 
-function getCards() {
+btn_get_cards.addEventListener("click", function() {
     let ammount = document.getElementById("ammount").value;
-
+    
     let query = getSearchQuery()
-
+    
     if (ammount == 1) {
         helperFetchAndDisplay(query)
     } else {
@@ -82,7 +92,11 @@ function getCards() {
               }, "200") // https://scryfall.com/docs/api
         }               // "We kindly ask that you insert 50 – 100
     }                   // milliseconds of delay between
-}                       // the requests you send to the server"
+}, false);              // the requests you send to the server"
+
+btn_download_cod.addEventListener("click", function() {
+    downloadCod()
+}, false);  
 
 // Request confirmation for exiting or reloading the page if the form is filled
 window.addEventListener('beforeunload', function (e) {
