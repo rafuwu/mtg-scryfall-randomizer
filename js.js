@@ -77,3 +77,13 @@ function getCards() {
         }               // "We kindly ask that you insert 50 – 100
     }                   // milliseconds of delay between
 }                       // the requests you send to the server"
+
+// Request confirmation for exiting or reloading the page if the form is filled
+window.addEventListener('beforeunload', function (e) {
+
+    if (document.getElementById("scryfall-api-search-query").value !== '') {
+
+        e.preventDefault();
+        e.returnValue = '';
+    }
+});
