@@ -112,4 +112,23 @@ table, th, td {
         border-right: 0;
 
     }
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #0d0b11;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #39324d;
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+        background: #241f31;
+    }
 }
