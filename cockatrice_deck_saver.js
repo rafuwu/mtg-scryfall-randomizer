@@ -83,9 +83,9 @@ function createComplexCardList() {
                 "name" : card_list[i]
             })
         } else { // If if exists already somewhere, find it and add +1 to the counter
-            for (let i = 0; i < card_list_complex.length; i++) {
-                if (card_list_complex[i].name == card_list[i]) {
-                    card_list_complex[i].number += 1
+            for (let j = 0; j < card_list_complex.length; j++) {
+                if (card_list_complex[j].name == card_list[i]) {
+                    card_list_complex[j].number += 1
                     break
                 }
                 
