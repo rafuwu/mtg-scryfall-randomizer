@@ -6,6 +6,7 @@
 
 * Graphical User Interface via the web app.
 * Get a list of random cards from the database.
+* Specify what type of cards to get using the same syntax of [**Scryfall Search**](https://scryfall.com/docs/syntax).
 * View various information about the cards, such as: set, rarity and card image.
 * 100% client-side execution. All requests are made via the browser.
 * No dependencies. All code was written from scratch and is included in the project.
