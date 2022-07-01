@@ -1,8 +1,20 @@
+:root {
+    --very-light-purple: #fbf4ff;
+    --light-darker-purple: #f6e8ff;
+    --dark-purple-text: #210030;
+    --strong-purple: #8816bd;
+    --normal-purple: #cd87ee;
+    --dead-purple: #2b253a;
+    
+    --purple-darker: #181520;
+    --very-dark-purple-back: #0d0b11;
+  }
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin-left: 1rem;
-    background-color: #fbf4ff;
-    color: #210030;
+    background-color: var(--very-light-purple);
+    color: var(--dark-purple-text);
 }
 
 #js-disabled-warning {
@@ -17,12 +29,12 @@ body {
 }
 
 :link, :visited {
-    color: #8816bd;
+    color: var(--strong-purple);
 }
 
 button {
-    background-color: #fbf4ff;
-    border-color: #7916a7;
+    background-color: var(--very-light-purple);
+    border-color: var(--strong-purple);
     border-width: 2px;
     border-radius: 4px;
 }
@@ -30,7 +42,7 @@ button {
 input {
     border-width: 1.3px;
     border-radius: 4px;
-    border-color: #8816bd;
+    border-color: var(--strong-purple);
 }
 
 #scryfall-api-search-query {
@@ -40,7 +52,7 @@ input {
     padding: 10px;
     position: sticky;
     top: 10px;
-    background-color: #2b253a;
+    background-color: var(--dead-purple);
     color: white;
     font-family: monospace;
 }
@@ -54,7 +66,7 @@ button {
 }
 
 #simple-card-output {
-    background-color: #f6e8ff;
+    background-color: var(--light-darker-purple);
     font-size: 14px;
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -83,30 +95,30 @@ table, th, td {
 
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: #0d0b11;
-        color: #cac8ce;
+        background-color: var(--very-dark-purple-back);
+        color: var(--very-light-purple);
     }
     table, th, td {
-        border-color: #fdfdfd;
+        border-color: var(--very-light-purple);
     }
     :link, :visited {
-        color: #cd87ee;
+        color: var(--normal-purple);
     }
     #simple-card-output {
-        background-color: #181520;
+        background-color: var(--purple-darker);
     }
     #scryfall-api-search-query {
-        border-color: #cd87ee;
+        border-color: var(--normal-purple);
     }
     button {
-        background-color: #0d0b11;
+        background-color: var(--very-dark-purple-back);
         color: white;
-        border-color: #cd87ee;
+        border-color: var(--normal-purple);
     }
     input {
-        background-color: #0d0b11;
+        background-color: var(--very-dark-purple-back);
         color: white;
-        border-color: #cd87ee;
+        border-color: var(--normal-purple);
         border-top: 0;
         border-left: 0;
         border-right: 0;
@@ -118,7 +130,7 @@ table, th, td {
 
     /* Track */
     ::-webkit-scrollbar-track {
-        background: #0d0b11;
+        background: var(--very-dark-purple-back);
     }
 
     /* Handle */
