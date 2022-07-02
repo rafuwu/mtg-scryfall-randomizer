@@ -1,10 +1,13 @@
 :root {
+    --scryfall-darker: #19181f;
+    --scryfall-dark: #2b253a;
+    --scryfall-lighter: #4f4255;
+
     --very-light-purple: #fbf4ff;
     --light-darker-purple: #f6e8ff;
     --dark-purple-text: #210030;
     --strong-purple: #8816bd;
     --normal-purple: #cd87ee;
-    --dead-purple: #2b253a;
     
     --purple-darker: #181520;
     --very-dark-purple-back: #0d0b11;
@@ -52,7 +55,7 @@ input {
     padding: 10px;
     position: sticky;
     top: 10px;
-    background-color: var(--dead-purple);
+    background-color: var(--scryfall-dark);
     color: white;
     font-family: monospace;
 }
