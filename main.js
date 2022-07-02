@@ -47,11 +47,22 @@ async function fetchScryfall(query) {
 }
 
 function displayInSimpleList(card) {
-    document.getElementById("simple-card-output").innerHTML += `<li><a href="${card.scryfall_uri}" target="_blank" rel="noopener noreferrer"><strong>${card.name}</strong></a> <span class="simple-list-set"> <a href="${card.scryfall_set_uri}" target="_blank" rel="noopener noreferrer">(<abbr title="${card.set_name}">${card.set.toUpperCase()}</abbr>)</a> </span> </li>`;
+    document.getElementById("simple-card-output").innerHTML += `
+<li>
+    <a href="${card.scryfall_uri}" target="_blank" rel="noopener noreferrer">
+        <strong>${card.name}</strong>
+    </a>
+    <span class="simple-list-set">
+        <a href="${card.scryfall_set_uri}" target="_blank" rel="noopener noreferrer">
+            (<abbr title="${card.set_name}">${card.set.toUpperCase()}</abbr>)
+        </a>
+    </span>
+</li>`;
 }
 
 function displayInTable(card) {
-    document.getElementById("table-output").innerHTML += `<tr>
+    document.getElementById("table-output").innerHTML += `
+<tr>
     <td><a href="${card.scryfall_uri}" target="_blank" rel="noopener noreferrer"> ${card.name} </a></td>
     <td><a href="${card.scryfall_set_uri}" target="_blank" rel="noopener noreferrer"> ${card.set_name}</a> (${card.set.toUpperCase()})</td>
     <td>${card.rarity}</td>
