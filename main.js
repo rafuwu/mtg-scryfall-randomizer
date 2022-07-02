@@ -65,6 +65,7 @@ function displayInTable(card) {
 <tr>
     <td><a href="${card.scryfall_uri}" target="_blank" rel="noopener noreferrer"> ${card.name} </a></td>
     <td><a href="${card.scryfall_set_uri}" target="_blank" rel="noopener noreferrer"> ${card.set_name}</a> (${card.set.toUpperCase()})</td>
+    <td>${card.type_line.split(" — ")[0]}</a></td>
     <td>${card.rarity}</td>
     <td><a href="${card.image_uris.large}" target="_blank" rel="noopener noreferrer"><img src="${card.image_uris.small}" alt="Card image" referrerpolicy="no-referrer"></a></td>
 </tr>`
