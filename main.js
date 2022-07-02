@@ -46,6 +46,20 @@ async function fetchScryfall(query) {
     return data;
 }
 
+// For when cards have 2 faces
+// Example: https://scryfall.com/card/znr/120/pelakka-predation-pelakka-caverns
+function getImageUris(card) {
+    try {
+        let image_uris = [card.card_faces[0].image_uris, card.card_faces[1].image_uris]
+        console.log("Card has 2 faces")
+        return image_uris
+    } catch (error) {
+        console.log("Card has 1 face")
+        let image_uris = [card.image_uris]
+        return image_uris
+    }
+}
+
 function displayInSimpleList(card) {
     document.getElementById("simple-card-output").innerHTML += `
 <li>
@@ -60,14 +74,20 @@ function displayInSimpleList(card) {
 </li>`;
 }
 
-function displayInTable(card) {
+function displayInTable(card, image_uris) {
+    if (image_uris.length > 1) {
+        var images_td = `<a href="${image_uris[0].large}" target="_blank" rel="noopener noreferrer"><img src="${image_uris[0].small}" alt="Card image" referrerpolicy="no-referrer"></a> <a href="${image_uris[1].large}" target="_blank" rel="noopener noreferrer"><img src="${image_uris[1].small}" alt="Card image" referrerpolicy="no-referrer"></a>`
+    } else {
+        var images_td = `<a href="${image_uris[0].large}" target="_blank" rel="noopener noreferrer"><img src="${image_uris[0].small}" alt="Card image" referrerpolicy="no-referrer"></a>`
+    }
+
     document.getElementById("table-output").innerHTML += `
 <tr>
     <td><a href="${card.scryfall_uri}" target="_blank" rel="noopener noreferrer"> ${card.name} </a></td>
     <td><a href="${card.scryfall_set_uri}" target="_blank" rel="noopener noreferrer"> ${card.set_name}</a> (${card.set.toUpperCase()})</td>
     <td>${card.type_line.split(" — ")[0]}</a></td>
     <td>${card.rarity}</td>
-    <td><a href="${card.image_uris.large}" target="_blank" rel="noopener noreferrer"><img src="${card.image_uris.small}" alt="Card image" referrerpolicy="no-referrer"></a></td>
+    <td class="table-imgs">${images_td}</td>
 </tr>`
 }
 
@@ -84,7 +104,7 @@ async function helperFetchAndDisplay(query) {
     debug(card, query)
 
     displayInSimpleList(card)
-    displayInTable(card)
+    displayInTable(card, getImageUris(card))
     
 }
 
