@@ -135,7 +135,7 @@ function downloadCod() {
     let cockatrice_deck_cards_array = cockatrice_deckCards(card_list_complex)
     let cockatrice_deck_cards_plaintext = cockatrice_deckCardListArrayToPlainText(cockatrice_deck_cards_array)
     let cockatrice_deck = cockatrice_deckJoin(date, cockatrice_deck_cards_plaintext)
-    download(cockatrice_deck, "Cockatrice_" + date + ".cod", Text)
+    download(cockatrice_deck, "Cockatrice_" + date + ".cod", "text/plain")
 }
 
 export { addCardToList, downloadCod }
