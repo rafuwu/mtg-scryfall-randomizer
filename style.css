@@ -90,10 +90,13 @@ table, th, td {
 table .table-imgs {
     text-align: center;
 }
+table img {
+    width: 146px;
+}
 
-@media only screen and (max-width: 490px) {
+@media only screen and (max-width: 655px) {
     table, img {
-        font-size: 85%;
+        font-size: 80%;
         image-rendering: -moz-crisp-edges;
         max-width: 96%;
     }
