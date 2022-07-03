@@ -85,9 +85,9 @@ function displayInTable(card, image_uris) {
 <tr>
     <td><a href="${card.scryfall_uri}" target="_blank" rel="noopener noreferrer"> ${card.name} </a></td>
     <td><a href="${card.scryfall_set_uri}" target="_blank" rel="noopener noreferrer"> ${card.set_name}</a> (${card.set.toUpperCase()})</td>
-    <td>${card.type_line.split(" — ")[0]}</a></td>
-    <td>${card.rarity}</td>
-    <td class="table-imgs">${images_td}</td>
+    <td class="table-center">${card.type_line.split(" — ")[0]}</a></td>
+    <td class="table-center">${card.rarity}</td>
+    <td class="table-center">${images_td}</td>
 </tr>`
 }
 
