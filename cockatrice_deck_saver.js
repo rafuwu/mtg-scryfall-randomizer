@@ -43,13 +43,14 @@ function defineDate() {
     // https://www.w3schools.com/jsref/jsref_obj_date.asp
     let d = new Date()
     let year = d.getFullYear()
-    let month = addLeadingZeros(d.getMonth())
-    let day = addLeadingZeros(d.getDay())
+    let month = addLeadingZeros(d.getMonth()+1)
+    let day = addLeadingZeros(d.getDate())
     let hour = addLeadingZeros(d.getHours())
     let minutes = addLeadingZeros(d.getMinutes())
     let seconds = addLeadingZeros(d.getSeconds())
 
     let date = `${year}-${month}-${day}_${hour}-${minutes}-${seconds}`
+    console.log(date)
     return date
 }
 
