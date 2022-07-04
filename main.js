@@ -3,6 +3,8 @@ import {addCardToList, downloadCod} from "./cockatrice_deck_saver.js"
 
 const btn_get_cards = document.getElementById("random-gen-get")
 const btn_download_cod = document.getElementById("btn-download-cod")
+const counter_current = document.getElementById("counter-current")
+const counter_total = document.getElementById("counter-total")
 
 
 const SCRYFALL_API_RANDOM = "https://api.scryfall.com/cards/random?q="
@@ -102,15 +104,18 @@ async function helperFetchAndDisplay(query) {
     }
 
     debug(card, query)
-
+    
     displayInSimpleList(card)
     displayInTable(card, getImageUris(card))
     
+    counter_current.innerHTML = parseInt(counter_current.innerHTML) + 1
 }
 
 btn_get_cards.addEventListener("click", function() {
     let ammount = document.getElementById("ammount").value;
     
+    counter_total.innerHTML = parseInt(counter_total.innerHTML) + parseInt(ammount);
+
     let query = getSearchQuery()
     
     if (ammount == 1) {
