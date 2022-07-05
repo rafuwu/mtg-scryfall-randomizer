@@ -55,7 +55,12 @@ function defineDate() {
 }
 
 function addCardToList(card) {
-    card_list.push(card.name)
+    if (card === 0) {
+        card_list = []
+    } else {
+        card_list.push(card.name)
+    }
+    
     console.log(card_list)
     return card_list
 }

@@ -1,8 +1,9 @@
 import {addCardToList, downloadCod} from "./cockatrice_deck_saver.js"
 
-
+// Buttons
 const btn_get_cards = document.getElementById("random-gen-get")
 const btn_download_cod = document.getElementById("btn-download-cod")
+const btn_clear_lists = document.getElementById("btn-clear-lists")
 const counter_current = document.getElementById("counter-current")
 const counter_total = document.getElementById("counter-total")
 
@@ -134,6 +135,15 @@ btn_get_cards.addEventListener("click", function() {
 btn_download_cod.addEventListener("click", function() {
     downloadCod()
 }, false);  
+
+btn_clear_lists.addEventListener("click" , () => {
+    if (confirm("Clear lists? THIS WILL DELETE ALL CONTENT.")) {
+        counter_total.innerHTML = counter_current.innerHTML = "0"
+        addCardToList(0)
+        document.getElementById("table-output").innerHTML = "<tr><th>Card name</th><th>Set</th><th>Type</th><th>Rarity</th><th>Image</th></tr>"
+        document.getElementById("simple-card-output").innerHTML = ""
+    }
+})
 
 // Request confirmation for exiting or reloading the page if the form is filled
 window.addEventListener('beforeunload', function (e) {
