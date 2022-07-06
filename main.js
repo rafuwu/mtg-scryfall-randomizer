@@ -1,5 +1,7 @@
 import {addCardToList, downloadCod} from "./cockatrice_deck_saver.js"
 
+document.getElementById("scryfall-api-search-query").value = localStorage.getItem("query");
+
 // Buttons
 const btn_get_cards = document.getElementById("random-gen-get")
 const btn_download_cod = document.getElementById("btn-download-cod")
@@ -37,6 +39,8 @@ function getSearchQuery() {
 
     if (query_plain == "")  console.info("Query is null")
     else                    console.table(query)
+
+    localStorage.setItem("query", query_plain);
 
     return query
 }
