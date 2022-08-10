@@ -82,10 +82,9 @@ function displayInSimpleList(card) {
 }
 
 function displayInTable(card, image_uris) {
-    if (image_uris.length > 1) {
-        var images_td = `<a href="${image_uris[0].large}" target="_blank" rel="noopener noreferrer"><img src="${image_uris[0].small}" alt="Card image" referrerpolicy="no-referrer"></a> <a href="${image_uris[1].large}" target="_blank" rel="noopener noreferrer"><img src="${image_uris[1].small}" alt="Card image" referrerpolicy="no-referrer"></a>`
-    } else {
-        var images_td = `<a href="${image_uris[0].large}" target="_blank" rel="noopener noreferrer"><img src="${image_uris[0].small}" alt="Card image" referrerpolicy="no-referrer"></a>`
+    for (let i = 0; i < image_uris.length; i++) {
+        var images_td = ""
+        var images_td = `${images_td} <a href="${image_uris[i].large}" target="_blank" rel="noopener noreferrer"><img src="${image_uris[i].small}" alt="Card image" referrerpolicy="no-referrer"></a>`
     }
 
     document.getElementById("table-output").innerHTML += `
