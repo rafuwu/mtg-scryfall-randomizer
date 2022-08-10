@@ -57,12 +57,12 @@ async function fetchScryfall(query) {
 // Example: https://scryfall.com/card/znr/120/pelakka-predation-pelakka-caverns
 function getImageUris(card) {
     try {
-        let image_uris = [card.card_faces[0].image_uris, card.card_faces[1].image_uris]
-        console.log("Card has 2 faces")
-        return image_uris
-    } catch (error) {
         console.log("Card has 1 face")
         let image_uris = [card.image_uris]
+        return image_uris
+    } catch (error) {
+        let image_uris = [card.card_faces[0].image_uris, card.card_faces[1].image_uris]
+        console.log("Card has 2 faces")
         return image_uris
     }
 }
