@@ -1,4 +1,4 @@
-import {addCardToList, downloadCod} from "./cockatrice_deck_saver.js"
+import {addCardToList, downloadCod} from "./cockatrice.js"
 
 document.getElementById("scryfall-api-search-query").value = localStorage.getItem("query");
 
