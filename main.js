@@ -13,6 +13,7 @@ const counter_total = document.getElementById("counter-total")
 const SCRYFALL_API_RANDOM = "https://api.scryfall.com/cards/random?q="
 
 
+// Assists with debugging. Prints a neat table to the console. Doesn't return anything.
 function debug(card, query) {
     let general_debug_table = {
         "query.plain" : query.plain,
@@ -28,6 +29,9 @@ function debug(card, query) {
     console.table(general_debug_table)
 }
 
+
+// Function to get the query (user input) from the form. (Local)
+// RETURNS: 'query' object (.plain and .URI)
 function getSearchQuery() {
     let query_plain = document.getElementById("scryfall-api-search-query").value
     let query_URI = encodeURIComponent(query_plain)
@@ -45,6 +49,9 @@ function getSearchQuery() {
     return query
 }
 
+
+// Primary function to fetch card data, given the query.
+// RETURNS: Card JSON
 async function fetchScryfall(query) {
     let response = await fetch(SCRYFALL_API_RANDOM + query);
     let data = await response.json();
@@ -55,6 +62,7 @@ async function fetchScryfall(query) {
 
 // For when cards have 2 faces
 // Example: https://scryfall.com/card/znr/120/pelakka-predation-pelakka-caverns
+// RETURNS: Array with image URIs
 function getImageUris(card) {
     try {
         console.log("Card has 1 face")
@@ -67,6 +75,8 @@ function getImageUris(card) {
     }
 }
 
+
+// This function displays the information it's given to a simple list. Doesn't return anything.
 function displayInSimpleList(card) {
     document.getElementById("simple-card-output").innerHTML += `
 <li>
@@ -81,6 +91,8 @@ function displayInSimpleList(card) {
 </li>`;
 }
 
+
+// This function displays the information it's given to a table. Doesn't return anything.
 function displayInTable(card, image_uris) {
     for (let i = 0; i < image_uris.length; i++) {
         var images_td = ""
@@ -97,6 +109,8 @@ function displayInTable(card, image_uris) {
 </tr>`
 }
 
+
+// Helper function that calls other functions responsible for fetching data and displaying it, and more. Doesn't return anything.
 async function helperFetchAndDisplay(query) {
     let card = await fetchScryfall(query.URI)
 
@@ -115,6 +129,9 @@ async function helperFetchAndDisplay(query) {
     counter_current.innerHTML = parseInt(counter_current.innerHTML) + 1
 }
 
+
+// This function is triggered when the button to get cards is pressed.
+// It stores the query in a variable and passes it to an helper function for fetching the data and displaying it. Doesn't return anything.
 btn_get_cards.addEventListener("click", function() {
     let ammount = document.getElementById("ammount").value;
     
@@ -135,10 +152,14 @@ btn_get_cards.addEventListener("click", function() {
     }                   // milliseconds of delay between
 }, false);              // the requests you send to the server"
 
+
+// This function is triggered when the button to download Cockatrice is pressed. It calls a function to do so. Doesn't return anything.
 btn_download_cod.addEventListener("click", function() {
     downloadCod()
 }, false);  
 
+
+// This function is triggered when the button to clear lists is pressed. It does so. Doesn't return anything.
 btn_clear_lists.addEventListener("click" , () => {
     if (confirm("Clear lists? THIS WILL DELETE ALL CONTENT.")) {
         counter_total.innerHTML = counter_current.innerHTML = "0"
@@ -147,6 +168,7 @@ btn_clear_lists.addEventListener("click" , () => {
         document.getElementById("simple-card-output").innerHTML = ""
     }
 })
+
 
 // Request confirmation for exiting or reloading the page if the form is filled
 window.addEventListener('beforeunload', function (e) {

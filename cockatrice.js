@@ -13,7 +13,7 @@ const COCKATRICE_DECK_CARD_TEMPLATE = '<card number="{NUMBER}" name="{NAME}"/>'
 let card_list = new Array
 
 
-// Function to download data to a file
+// Function to download data to a file. Doesn't return anything.
 function download(text, filename, type) {
     var file = new Blob([text], {type: type});
     if (window.navigator.msSaveOrOpenBlob) // IE10+
@@ -32,13 +32,19 @@ function download(text, filename, type) {
     }
 }
 
+// Adds leading zeros so that numbers have two digits.
+// RETURNS: Two-digit number
 function addLeadingZeros(x) {
     if (x < 10) {
         x = "0" + x
     }
+
     return x
 }
 
+
+// Defines date.
+// RETURNS: date (string)
 function defineDate() {
     // https://www.w3schools.com/jsref/jsref_obj_date.asp
     let d = new Date()
@@ -51,9 +57,14 @@ function defineDate() {
 
     let date = `${year}-${month}-${day}_${hour}-${minutes}-${seconds}`
     console.log(date)
+
     return date
 }
 
+
+// Adds given card (name) to the card array list, later used for downloading a Cockatrice deck.
+// If the input is the number 0, it empties the list.
+// RETURNS: card_list
 function addCardToList(card) {
     if (card === 0) {
         card_list = []
@@ -62,9 +73,14 @@ function addCardToList(card) {
     }
     
     console.log(card_list)
+
     return card_list
 }
 
+
+// This function creates a complex list of cards that stores cards only once along with its count.
+// This complex list is used for generating a Cockatrice deck and is only generated once per needed deck creation.
+// RETURNS: card_list_complex (Array)
 function createComplexCardList() {
     let card_list_complex = new Array
     /*   ------- Array example ------- 
@@ -106,6 +122,7 @@ function createComplexCardList() {
     return card_list_complex
 }
 
+
 function cockatrice_deckCards(card_list_complex) {
     let cockatrice_deck_cards_array = new Array
     for (let i = 0; i < card_list_complex.length; i++) {
@@ -120,11 +137,13 @@ function cockatrice_deckCards(card_list_complex) {
     return cockatrice_deck_cards_array
 }
 
+
 function cockatrice_deckCardListArrayToPlainText(cockatrice_deck_cards_array) {
     let cockatrice_deck_cards_plaintext = cockatrice_deck_cards_array.join("\n        ")
     console.debug(cockatrice_deck_cards_plaintext)
     return cockatrice_deck_cards_plaintext
 }
+
 
 function cockatrice_deckJoin(date, cockatrice_deck_cards_plaintext) {
     var cockatrice_deck = COCKATRICE_DECK_FILE_TEMPLATE
@@ -135,6 +154,8 @@ function cockatrice_deckJoin(date, cockatrice_deck_cards_plaintext) {
     return cockatrice_deck
 }
 
+
+// This function calls all necessary functions to download a Cockatrice deck, and it does so. Doesn't return anything.
 function downloadCod() {
     let date = defineDate()
     let card_list_complex = createComplexCardList()
@@ -143,5 +164,6 @@ function downloadCod() {
     let cockatrice_deck = cockatrice_deckJoin(date, cockatrice_deck_cards_plaintext)
     download(cockatrice_deck, "Cockatrice_" + date + ".cod", "text/plain")
 }
+
 
 export { addCardToList, downloadCod }
