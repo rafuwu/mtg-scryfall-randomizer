@@ -64,14 +64,20 @@ async function fetchScryfall(query) {
 // Example: https://scryfall.com/card/znr/120/pelakka-predation-pelakka-caverns
 // RETURNS: Array with image URIs
 function getImageUris(card) {
-    try {
-        console.log("Card has 1 face")
-        let image_uris = [card.image_uris]
-        return image_uris
-    } catch (error) {
-        let image_uris = [card.card_faces[0].image_uris, card.card_faces[1].image_uris]
-        console.log("Card has 2 faces")
-        return image_uris
+    if (["transform", "modal_dfc", "double_faced_token", "art_series"].includes(card.layout)) {
+        try {
+            let image_uris = [card.card_faces[0].image_uris, card.card_faces[1].image_uris]
+            return image_uris
+        } catch (error) {
+            console.log(error)
+        }
+    } else {
+        try {
+            let image_uris = [card.image_uris]
+            return image_uris
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 
@@ -94,9 +100,10 @@ function displayInSimpleList(card) {
 
 // This function displays the information it's given to a table. Doesn't return anything.
 function displayInTable(card, image_uris) {
+    let images_td = ""
+
     for (let i = 0; i < image_uris.length; i++) {
-        var images_td = ""
-        var images_td = `${images_td} <a href="${image_uris[i].large}" target="_blank" rel="noopener noreferrer"><img src="${image_uris[i].small}" alt="Card image" referrerpolicy="no-referrer"></a>`
+        images_td = `${images_td} <a href="${image_uris[i].large}" target="_blank" rel="noopener noreferrer"><img src="${image_uris[i].small}" alt="Card image" referrerpolicy="no-referrer"></a>`
     }
 
     document.getElementById("table-output").innerHTML += `
