@@ -1,3 +1,5 @@
+[![](https://files.catbox.moe/u0djqp.png)](https://rafuwu.github.io/mtg-scryfall-randomizer/)
+
 # MTG card randomizer
 
 [**Magic: The Gathering**](https://magic.wizards.com/en) card randomizer web app using the [**Scryfall API**](https://scryfall.com/docs/api).
