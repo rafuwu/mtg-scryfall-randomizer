@@ -53,8 +53,6 @@ input {
     overflow: auto;
     white-space: nowrap;
     padding: 10px;
-    position: sticky;
-    top: 10px;
     background-color: var(--scryfall-dark);
     color: white;
     font-family: monospace;
@@ -64,11 +62,7 @@ input {
     font-family: monospace;
 }
 
-.clickable {
-    cursor: pointer;
-}
-
-button {
+.clickable, button {
     cursor: pointer;
 }
 
