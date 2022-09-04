@@ -1,4 +1,4 @@
-import {addCardToList, downloadCod} from "./cockatrice.js"
+import {addCardToList, downloadCod} from "./deck.js"
 
 document.getElementById("scryfall-api-search-query").value = localStorage.getItem("query");
 
@@ -69,7 +69,7 @@ function getImageUris(card) {
             let image_uris = [card.card_faces[0].image_uris, card.card_faces[1].image_uris]
             return image_uris
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     } else {
         try {
@@ -125,7 +125,7 @@ async function helperFetchAndDisplay(query) {
         addCardToList(card)
         
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 
     debug(card, query)
@@ -169,8 +169,12 @@ btn_download_cod.addEventListener("click", function() {
 // This function is triggered when the button to clear lists is pressed. It does so. Doesn't return anything.
 btn_clear_lists.addEventListener("click" , () => {
     if (confirm("Clear lists? THIS WILL DELETE ALL CONTENT.")) {
+        try {
+            addCardToList(0)
+        } catch (error) {
+            console.error(error)
+        }
         counter_total.innerHTML = counter_current.innerHTML = "0"
-        addCardToList(0)
         document.getElementById("table-output").innerHTML = "<tr><th>Card name</th><th>Set</th><th>Type</th><th>Rarity</th><th>Image</th></tr>"
         document.getElementById("simple-card-output").innerHTML = ""
     }
