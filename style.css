@@ -100,6 +100,20 @@ table img {
     }
 }
 
+.download-buttons>* {
+    display: block;
+    margin-bottom: .5em;
+}
+
+.download-buttons {
+    margin-bottom: 1em;
+}
+
+details>summary {
+    font-weight: bold;
+    font-size: smaller;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
         background-color: var(--very-dark-purple-back);

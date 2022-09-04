@@ -1,10 +1,11 @@
-import {addCardToList, downloadCod} from "./deck.js"
+import {addCardToList, downloadCod, downloadDec} from "./deck.js"
 
 document.getElementById("scryfall-api-search-query").value = localStorage.getItem("query");
 
 // Buttons
 const btn_get_cards = document.getElementById("random-gen-get")
 const btn_download_cod = document.getElementById("btn-download-cod")
+const btn_download_dec = document.getElementById("btn-download-dec")
 const btn_clear_lists = document.getElementById("btn-clear-lists")
 const counter_current = document.getElementById("counter-current")
 const counter_total = document.getElementById("counter-total")
@@ -160,10 +161,15 @@ btn_get_cards.addEventListener("click", function() {
 }, false);              // the requests you send to the server"
 
 
-// This function is triggered when the button to download Cockatrice is pressed. It calls a function to do so. Doesn't return anything.
+// This function is triggered when the button to download a .cod file is pressed. It calls a function to do so. Doesn't return anything.
 btn_download_cod.addEventListener("click", function() {
     downloadCod()
-}, false);  
+}, false);
+
+// This function is triggered when the button to download a .dec file is pressed. It calls a function to do so. Doesn't return anything.
+btn_download_dec.addEventListener("click", function() {
+    downloadDec()
+}, false);
 
 
 // This function is triggered when the button to clear lists is pressed. It does so. Doesn't return anything.

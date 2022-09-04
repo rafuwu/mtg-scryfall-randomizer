@@ -1,4 +1,5 @@
 import {generateCodContents} from "./deck.cod.js"
+import {generateDecContents} from "./deck.dec.js"
 
 let card_list = new Array
 
@@ -122,4 +123,13 @@ function downloadCod() {
 }
 
 
-export {addCardToList, downloadCod}
+// This function calls all necessary functions to download a .dec file, and it does so. Doesn't return anything.
+function downloadDec() {
+    let date = defineDate()
+    let card_list_complex = generateComplexCardList()
+    let decFile = generateDecContents(card_list_complex)
+    downloadFile(decFile, date + ".cod", "text/plain")
+}
+
+
+export {addCardToList, downloadCod, downloadDec}
