@@ -112,6 +112,8 @@ table img {
 details>summary {
     font-weight: bold;
     font-size: smaller;
+    cursor: pointer;
+    margin-bottom: 1em;
 }
 
 @media (prefers-color-scheme: dark) {
