@@ -1,4 +1,4 @@
-const COCKATRICE_DECK_FILE_TEMPLATE = `<?xml version="1.0" encoding="UTF-8"?>
+const COD_DECK_FILE_TEMPLATE = `<?xml version="1.0" encoding="UTF-8"?>
 <cockatrice_deck version="1">
     <deckname>{DECKNAME}</deckname>
     <comments>{COMMENTS}</comments>
@@ -8,13 +8,13 @@ const COCKATRICE_DECK_FILE_TEMPLATE = `<?xml version="1.0" encoding="UTF-8"?>
 </cockatrice_deck>
 `
 
-const COCKATRICE_DECK_CARD_TEMPLATE = '<card number="{NUMBER}" name="{NAME}"/>'
+const COD_DECK_CARD_TEMPLATE = '<card number="{NUMBER}" name="{NAME}"/>'
 
 let card_list = new Array
 
 
 // Function to download data to a file. Doesn't return anything.
-function download(text, filename, type) {
+function downloadFile(text, filename, type) {
     var file = new Blob([text], {type: type});
     if (window.navigator.msSaveOrOpenBlob) // IE10+
         window.navigator.msSaveOrOpenBlob(file, filename);
@@ -81,7 +81,7 @@ function addCardToList(card) {
 // This function creates a complex list of cards that stores cards only once along with its count.
 // This complex list is used for generating a Cockatrice deck and is only generated once per needed deck creation.
 // RETURNS: card_list_complex (Array)
-function createComplexCardList() {
+function generateComplexCardList() {
     let card_list_complex = new Array
     /*   ------- Array example ------- 
      *
@@ -123,46 +123,40 @@ function createComplexCardList() {
 }
 
 
-function cockatrice_deckCards(card_list_complex) {
-    let cockatrice_deck_cards_array = new Array
+function generateCodContents(card_list_complex, date) {
+    // Card tenplate replacement
+    let codXmlCardArray = new Array
     for (let i = 0; i < card_list_complex.length; i++) {
-        var a = COCKATRICE_DECK_CARD_TEMPLATE
+        var a = COD_DECK_CARD_TEMPLATE
         var a = a.replace("{NUMBER}", card_list_complex[i].number)
         var a = a.replace("{NAME}", card_list_complex[i].name)
         
-        cockatrice_deck_cards_array.push(a)
+        codXmlCardArray.push(a)
         
     }
-    console.debug(cockatrice_deck_cards_array)
-    return cockatrice_deck_cards_array
-}
+    console.debug(codXmlCardArray)
 
+    // Card XML plain text
+    let codXmlCardText = codXmlCardArray.join("\n        ")
+    console.debug(codXmlCardText)
 
-function cockatrice_deckCardListArrayToPlainText(cockatrice_deck_cards_array) {
-    let cockatrice_deck_cards_plaintext = cockatrice_deck_cards_array.join("\n        ")
-    console.debug(cockatrice_deck_cards_plaintext)
-    return cockatrice_deck_cards_plaintext
-}
+    // COD file final template replacement
+    let codFile = COD_DECK_FILE_TEMPLATE
+    codFile = codFile.replace("{DECKNAME}", date)
+    codFile = codFile.replace("{COMMENTS}", 'This deck was generated using "MTG card randomizer"')
+    codFile = codFile.replace("{CARDS}", codXmlCardText)
+    console.debug(codFile)
 
-
-function cockatrice_deckJoin(date, cockatrice_deck_cards_plaintext) {
-    var cockatrice_deck = COCKATRICE_DECK_FILE_TEMPLATE
-    var cockatrice_deck = cockatrice_deck.replace("{DECKNAME}", date)
-    var cockatrice_deck = cockatrice_deck.replace("{COMMENTS}", 'This deck was generated using "MTG card randomizer"')
-    var cockatrice_deck = cockatrice_deck.replace("{CARDS}", cockatrice_deck_cards_plaintext)
-    console.debug(cockatrice_deck)
-    return cockatrice_deck
+    return codFile
 }
 
 
 // This function calls all necessary functions to download a Cockatrice deck, and it does so. Doesn't return anything.
 function downloadCod() {
     let date = defineDate()
-    let card_list_complex = createComplexCardList()
-    let cockatrice_deck_cards_array = cockatrice_deckCards(card_list_complex)
-    let cockatrice_deck_cards_plaintext = cockatrice_deckCardListArrayToPlainText(cockatrice_deck_cards_array)
-    let cockatrice_deck = cockatrice_deckJoin(date, cockatrice_deck_cards_plaintext)
-    download(cockatrice_deck, "Cockatrice_" + date + ".cod", "text/plain")
+    let card_list_complex = generateComplexCardList()
+    let codFile = generateCodContents(card_list_complex, date)
+    downloadFile(codFile, "Cockatrice_" + date + ".cod", "text/plain")
 }
 
 
