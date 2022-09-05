@@ -53,21 +53,22 @@ function defineDate() {
 }
 
 
-// Adds given card (name) to the card array list, later used for downloading a Cockatrice deck.
-// If the input is the number 0, it empties the list.
-// RETURNS: card_list
+// If the input is the number 0, it empties the list and returns an empty list.
+// If the input is the number 1, it just returns the list.
+// If the input is a card, it adds it (its name) to the card array list, later used for saving decks.
 function editCardList(card) {
-    if (card === 0) {
-        card_list = []
-    } else if (card === 1) {
-        return card_list
-    } else {
-        card_list.push(card.name)
+    switch (card) {
+        case 0:
+            card_list = []
+            console.log("Emptied card list")
+            return card_list
+        case 1:
+            return card_list
+        default:
+            card_list.push(card.name)
+            console.log(card_list)
+            return card_list
     }
-    
-    console.log(card_list)
-
-    return card_list
 }
 
 
