@@ -1,4 +1,4 @@
-import {addCardToList, downloadCod, downloadDec, copyDecToClipboard} from "./deck.js"
+import {addCardToList as editCardList, downloadCod, downloadDec, copyDecToClipboard} from "./deck.js"
 
 document.getElementById("scryfall-api-search-query").value = localStorage.getItem("query");
 
@@ -124,7 +124,7 @@ async function helperFetchAndDisplay(query) {
     let card = await fetchScryfall(query.URI)
 
     try {
-        addCardToList(card)
+        editCardList(card)
         
     } catch (error) {
         console.error(error)
@@ -143,6 +143,7 @@ async function helperFetchAndDisplay(query) {
 // It stores the query in a variable and passes it to an helper function for fetching the data and displaying it. Doesn't return anything.
 btn_get_cards.addEventListener("click", function() {
     let ammount = document.getElementById("ammount").value;
+    if (ammount < 1) return
     
     counter_total.innerHTML = parseInt(counter_total.innerHTML) + parseInt(ammount);
 
@@ -164,25 +165,30 @@ btn_get_cards.addEventListener("click", function() {
 
 // This function is triggered when the button to download a .cod file is pressed. It calls a function to do so. Doesn't return anything.
 btn_download_cod.addEventListener("click", function() {
+    if (editCardList(1).length === 0) return
     downloadCod()
 }, false);
 
 // This function is triggered when the button to download a .dec file is pressed. It calls a function to do so. Doesn't return anything.
 btn_download_dec.addEventListener("click", function() {
+    if (editCardList(1).length === 0) return
     downloadDec()
 }, false);
 
 // This function is triggered when the button to download a .dec file is pressed. It calls a function to do so. Doesn't return anything.
 btn_copytoclip.addEventListener("click", function() {
+    if (editCardList(1).length === 0) return
     copyDecToClipboard()
 }, false);
 
 
 // This function is triggered when the button to clear lists is pressed. It does so. Doesn't return anything.
 btn_clear_lists.addEventListener("click" , () => {
+    if (editCardList(1).length === 0) return
+
     if (confirm("Clear lists? THIS WILL DELETE ALL CONTENT.")) {
         try {
-            addCardToList(0)
+            editCardList(0)
         } catch (error) {
             console.error(error)
         }

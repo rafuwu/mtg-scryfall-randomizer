@@ -56,9 +56,11 @@ function defineDate() {
 // Adds given card (name) to the card array list, later used for downloading a Cockatrice deck.
 // If the input is the number 0, it empties the list.
 // RETURNS: card_list
-function addCardToList(card) {
+function editCardList(card) {
     if (card === 0) {
         card_list = []
+    } else if (card === 1) {
+        return card_list
     } else {
         card_list.push(card.name)
     }
@@ -147,4 +149,4 @@ function copyDecToClipboard() {
 }
 
 
-export {addCardToList, downloadCod, downloadDec, copyDecToClipboard}
+export {editCardList as addCardToList, downloadCod, downloadDec, copyDecToClipboard}
