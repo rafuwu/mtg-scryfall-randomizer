@@ -133,9 +133,7 @@ function downloadDec() {
 
 
 // This function calls all necessary functions to copy .dec deck to the clipboard, and it does so. Doesn't return anything.
-// Browser support:
-// https://caniuse.com/mdn-api_clipboard_writetext
-// https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText#browser_compatibility
+// Browser support: https://caniuse.com/mdn-api_clipboard_writetext | https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText#browser_compatibility
 function copyDecToClipboard() {
     let card_list_complex = generateComplexCardList()
     let decFile = generateDecContents(card_list_complex)
@@ -144,7 +142,7 @@ function copyDecToClipboard() {
         navigator.clipboard.writeText(decFile);
     } catch (error) {
         alert("Copying deck to clipboard failed!\nThe browser needs to support the Clipboard API.\n\nPlease see browser compatibility.")
-        window.open("https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText#browser_compatibility", "_blank", "height=640,width=1000,resizable=yes")
+        window.open("https://caniuse.com/mdn-api_clipboard_writetext", "_blank", "height=560,width=853,resizable=yes")
     }
 }
 
