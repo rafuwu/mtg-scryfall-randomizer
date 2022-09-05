@@ -1,4 +1,4 @@
-import {addCardToList, downloadCod, downloadDec} from "./deck.js"
+import {addCardToList, downloadCod, downloadDec, copyDecToClipboard} from "./deck.js"
 
 document.getElementById("scryfall-api-search-query").value = localStorage.getItem("query");
 
@@ -6,6 +6,7 @@ document.getElementById("scryfall-api-search-query").value = localStorage.getIte
 const btn_get_cards = document.getElementById("random-gen-get")
 const btn_download_cod = document.getElementById("btn-download-cod")
 const btn_download_dec = document.getElementById("btn-download-dec")
+const btn_copytoclip = document.getElementById("btn-copytoclip")
 const btn_clear_lists = document.getElementById("btn-clear-lists")
 const counter_current = document.getElementById("counter-current")
 const counter_total = document.getElementById("counter-total")
@@ -169,6 +170,11 @@ btn_download_cod.addEventListener("click", function() {
 // This function is triggered when the button to download a .dec file is pressed. It calls a function to do so. Doesn't return anything.
 btn_download_dec.addEventListener("click", function() {
     downloadDec()
+}, false);
+
+// This function is triggered when the button to download a .dec file is pressed. It calls a function to do so. Doesn't return anything.
+btn_copytoclip.addEventListener("click", function() {
+    copyDecToClipboard()
 }, false);
 
 
