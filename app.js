@@ -15,38 +15,18 @@ const counter_total = document.getElementById("counter-total")
 const SCRYFALL_API_RANDOM = "https://api.scryfall.com/cards/random?q="
 
 
-// Assists with debugging. Prints a neat table to the console. Doesn't return anything.
-function debug(card, query) {
-    let general_debug_table = {
-        "query.plain" : query.plain,
-        "query.URI" : query.URI,
-        "card.name" : card.name,
-        "card.rarity" : card.rarity,
-        "card.set" : card.set,
-        "card.set_name" : card.set_name,
-        "card.scryfall_uri" : card.scryfall_uri,
-        "card.scryfall_set_uri" : card.scryfall_set_uri,
-    }
-
-    console.table(general_debug_table)
-}
-
 
 // Function to get the query (user input) from the form. (Local)
 // RETURNS: 'query' object (.plain and .URI)
 function getSearchQuery() {
-    let query_plain = document.getElementById("scryfall-api-search-query").value
-    let query_URI = encodeURIComponent(query_plain)
+    let query = new Object
+    query.plain = document.getElementById("scryfall-api-search-query").value
+    query.URI = encodeURIComponent(query.plain)
 
-    let query = {
-        "plain": query_plain,
-        "URI": query_URI,
-    }
+    if (query.plain == "")  console.info("Query is empty")
+    else                    console.log("Query object: ", query)
 
-    if (query_plain == "")  console.info("Query is null")
-    else                    console.table(query)
-
-    localStorage.setItem("query", query_plain);
+    localStorage.setItem("query", query.plain);
 
     return query
 }
@@ -78,7 +58,7 @@ function getImageUris(card) {
             let image_uris = [card.image_uris]
             return image_uris
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }
 }
@@ -123,6 +103,16 @@ function displayInTable(card, image_uris) {
 async function helperFetchAndDisplay(query) {
     let card = await fetchScryfall(query.URI)
 
+    console.groupCollapsed("🎴 New card: ", card.name)
+    console.table({
+        "Name":card.name,
+        "Rarity":card.rarity,
+        "Set code":card.set,
+        "Set name":card.set_name,
+        "Scryfall URI (card)":card.scryfall_uri,
+        "Scryfall URI (set)":card.scryfall_set_uri
+    }); console.groupEnd()
+
     try {
         editCardList(card)
         
@@ -130,7 +120,6 @@ async function helperFetchAndDisplay(query) {
         console.error(error)
     }
 
-    debug(card, query)
     
     displayInSimpleList(card)
     displayInTable(card, getImageUris(card))

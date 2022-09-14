@@ -66,7 +66,7 @@ function editCardList(card) {
             return card_list
         default:
             card_list.push(card.name)
-            console.log(card_list)
+            console.debug("Card list array: ", card_list)
             return card_list
     }
 }
@@ -110,8 +110,7 @@ function generateComplexCardList() {
         
     }
 
-    console.log(card_list_complex)
-    console.table(card_list_complex)
+    console.debug("Complex card list object array:\n",card_list_complex)
 
     return card_list_complex
 }

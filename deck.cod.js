@@ -22,18 +22,21 @@ function generateCodContents(card_list_complex, date) {
         codXmlCardArray.push(a)
         
     }
-    console.debug(codXmlCardArray)
+    // console.debug(codXmlCardArray)
 
     // Card XML plain text
     let codXmlCardText = codXmlCardArray.join("\n        ")
-    console.debug(codXmlCardText)
+    // console.debug(codXmlCardText)
 
     // COD file final template replacement
     let codFile = COD_DECK_FILE_TEMPLATE
     codFile = codFile.replace("{DECKNAME}", date)
     codFile = codFile.replace("{COMMENTS}", 'This deck was generated using "MTG card randomizer"')
     codFile = codFile.replace("{CARDS}", codXmlCardText)
-    console.debug(codFile)
+    
+    console.groupCollapsed(".cod file contents:")
+    console.log(codFile)
+    console.groupEnd()
 
     return codFile
 }
