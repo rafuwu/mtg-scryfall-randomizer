@@ -14,6 +14,8 @@ const counter_total = document.getElementById("counter-total")
 
 const SCRYFALL_API_RANDOM = "https://api.scryfall.com/cards/random?q="
 
+let time_performance_array = new Array
+
 
 
 // Function to get the query (user input) from the form. (Local)
@@ -99,9 +101,42 @@ function displayInTable(card, image_uris) {
 }
 
 
+// https://www.geeksforgeeks.org/how-to-get-median-of-an-array-of-numbers-in-javascript/
+function medianofArr(arr) {
+    let concat = arr;
+
+    concat = concat.sort(
+        function (a, b) { return a - b });
+
+    let length = concat.length;
+
+    if (length % 2 == 1) {
+        return concat[(length / 2) - .5]
+    }
+    else { 
+        return (concat[length / 2] + concat[(length / 2) - 1]) / 2;
+    }
+}
+
+
+function displayTime(time) {
+    if (time == 0) {
+        time_performance_array = []
+    } else {
+        time_performance_array.push(time)
+        let time_median = medianofArr(time_performance_array)
+    
+        document.getElementById("perf-average").innerHTML = `${time_median} ms`
+    }
+}
+
+
 // Helper function that calls other functions responsible for fetching data and displaying it, and more. Doesn't return anything.
 async function helperFetchAndDisplay(query) {
-    let card = await fetchScryfall(query.URI)
+    let a = performance.now()
+        let card = await fetchScryfall(query.URI)
+    let b = performance.now()
+    displayTime(Math.round(b - a))
 
     console.groupCollapsed("🎴 New card: ", card.name)
     console.table({
@@ -138,6 +173,8 @@ btn_get_cards.addEventListener("click", function() {
 
     let query = getSearchQuery()
     
+    displayTime(0)
+
     if (ammount == 1) {
         helperFetchAndDisplay(query)
     } else {

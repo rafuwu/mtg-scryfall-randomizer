@@ -58,8 +58,16 @@ input {
     font-family: monospace;
 }
 
-#counter {
+.stats {
     font-family: monospace;
+}
+
+.stats>div {
+    margin-bottom: .5em;
+}
+
+.stats>div:first-child {
+    margin-bottom: 1em;
 }
 
 .clickable, button {
