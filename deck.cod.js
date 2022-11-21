@@ -15,12 +15,11 @@ function generateCodContents(card_list_complex, date) {
     // Card tenplate replacement
     let codXmlCardArray = new Array
     for (let i = 0; i < card_list_complex.length; i++) {
-        var a = COD_DECK_CARD_TEMPLATE
-        var a = a.replace("{NUMBER}", card_list_complex[i].number)
-        var a = a.replace("{NAME}", card_list_complex[i].name)
+        let a = COD_DECK_CARD_TEMPLATE
+        a = a.replace("{NUMBER}", card_list_complex[i].number)
+        a = a.replace("{NAME}", card_list_complex[i].name)
         
         codXmlCardArray.push(a)
-        
     }
     // console.debug(codXmlCardArray)
 

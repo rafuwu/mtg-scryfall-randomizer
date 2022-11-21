@@ -19,11 +19,11 @@ let time_performance_array = new Array
 
 
 // Function to get the query (user input) from the form. (Local)
-// RETURNS: 'query' object (.plain and .URI)
+// RETURNS: 'query' object (.plain and .uri)
 function getSearchQuery() {
     let query = new Object
     query.plain = document.getElementById("scryfall-api-search-query").value
-    query.URI = encodeURIComponent(query.plain)
+    query.uri = encodeURIComponent(query.plain)
 
     if (query.plain == "")  console.info("Query is empty")
     else                    console.log("Query object: ", query)
@@ -102,7 +102,7 @@ function displayInTable(card, image_uris) {
 
 
 // https://www.geeksforgeeks.org/how-to-get-median-of-an-array-of-numbers-in-javascript/
-function medianofArr(arr) {
+function medianOfArr(arr) {
     let concat = arr;
 
     concat = concat.sort(
@@ -124,7 +124,7 @@ function displayTime(time) {
         time_performance_array = []
     } else {
         time_performance_array.push(time)
-        let time_median = medianofArr(time_performance_array)
+        let time_median = medianOfArr(time_performance_array)
     
         document.getElementById("perf-average").innerHTML = `${time_median} ms`
     }
@@ -134,7 +134,7 @@ function displayTime(time) {
 // Helper function that calls other functions responsible for fetching data and displaying it, and more. Doesn't return anything.
 async function helperFetchAndDisplay(query) {
     let a = performance.now()
-        let card = await fetchScryfall(query.URI)
+        let card = await fetchScryfall(query.uri)
     let b = performance.now()
     displayTime(Math.round(b - a))
 
